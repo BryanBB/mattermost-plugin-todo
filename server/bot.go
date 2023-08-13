@@ -1,10 +1,10 @@
 package main
 
 import (
-	"strings"
+	//"strings"
 
 	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/pkg/errors"
+	//"github.com/pkg/errors"
 )
 
 // PostBotDM posts a DM as the cloud bot user.
