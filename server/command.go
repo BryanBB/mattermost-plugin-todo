@@ -93,12 +93,12 @@ func getCommand() *model.Command {
 }
 
 func (p *Plugin) postCommandResponse(args *model.CommandArgs, text string) {
-	post := &model.Post{
-		UserId:    p.BotUserID,
-		ChannelId: args.ChannelId,
-		Message:   text,
-	}
-	_ = p.API.SendEphemeralPost(args.UserId, post)
+//	post := &model.Post{
+//		UserId:    p.BotUserID,
+//		ChannelId: args.ChannelId,
+//		Message:   text,
+//	}
+//	_ = p.API.SendEphemeralPost(args.UserId, post)
 }
 
 // ExecuteCommand executes a given command and returns a command response.
