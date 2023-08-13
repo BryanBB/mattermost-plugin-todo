@@ -29,6 +29,14 @@
                 "help_text": "When true, the buttons in the team sidebar on the left toolbar will be hidden.",
                 "placeholder": "",
                 "default": null
+            },
+            {
+                "key": "ThirdApi",
+                "display_name": "3th api:",
+                "type": "text",
+                "help_text": "if this api config, todo data would send to 3th api",
+                "placeholder": "",
+                "default": ""
             }
         ]
     }

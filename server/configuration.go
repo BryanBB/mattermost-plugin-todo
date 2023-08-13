@@ -21,6 +21,7 @@ import (
 // copy appropriate for your types.
 type configuration struct {
 	HideTeamSidebar bool `json:"hide_team_sidebar"`
+    ThirdApi string
 }
 
 // Clone shallow copies the configuration. Your implementation may require a deep copy if
