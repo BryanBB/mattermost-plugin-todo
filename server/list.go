@@ -2,9 +2,6 @@ package main
 
 import (
 	"fmt"
-	"encoding/json"
-	"net/http"
-	"bytes"
 
 	"github.com/mattermost/mattermost-server/v5/plugin"
 	"github.com/pkg/errors"
@@ -166,9 +163,6 @@ func (l *listManager) CompleteIssue(userID, issueID string) (issue *Issue, forei
 	if err != nil {
 		l.api.LogError("cannot clean foreigner issue after complete, Err=", err.Error())
 	}
-
-    jsonStr, _ := json.Marshal(issue)
-    http.Post("http://app.ttjy.club/api/todo", "application/json", bytes.NewBuffer([]byte(jsonStr)))
 
 	return issue, ir.ForeignUserID, issueList, nil
 }

