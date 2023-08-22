@@ -93,12 +93,13 @@ func getCommand() *model.Command {
 }
 
 func (p *Plugin) postCommandResponse(args *model.CommandArgs, text string) {
-//	post := &model.Post{
-//		UserId:    p.BotUserID,
-//		ChannelId: args.ChannelId,
-//		Message:   text,
-//	}
-//	_ = p.API.SendEphemeralPost(args.UserId, post)
+	//wangdexu remove bot post
+	//	post := &model.Post{
+	//		UserId:    p.BotUserID,
+	//		ChannelId: args.ChannelId,
+	//		Message:   text,
+	//	}
+	//	_ = p.API.SendEphemeralPost(args.UserId, post)
 }
 
 // ExecuteCommand executes a given command and returns a command response.
@@ -207,14 +208,24 @@ func (p *Plugin) runSendCommand(args []string, extra *model.CommandArgs) (bool, 
 }
 
 func (p *Plugin) runAddCommand(args []string, extra *model.CommandArgs) (bool, error) {
-	message := strings.Join(args, " ")
+	message_str := strings.Join(args, " ")
+	message := ""
+	desc := ""
+	//wangdexu split message and desc by |
+	if strings.Contains(message_str, "|") {
+		parts := strings.Split(message_str, "|")
+		message = parts[0]
+		desc = parts[1]
+	} else {
+		message = message_str
+	}
 
 	if message == "" {
 		p.postCommandResponse(extra, "Please add a task.")
 		return false, nil
 	}
 
-	newIssue, err := p.listManager.AddIssue(extra.UserId, message, "", "")
+	newIssue, err := p.listManager.AddIssue(extra.UserId, message, desc, "")
 	if err != nil {
 		return false, err
 	}
