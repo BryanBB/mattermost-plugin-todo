@@ -1,10 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"bytes"
 	"strconv"
 	"sync"
 	"time"
@@ -494,11 +494,11 @@ func (p *Plugin) handleComplete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-    //wangdexu  
-    //{"id":"mhmaooxa9j835cya7tm8iu9b3y","message":"dragon \/\u02c8dr\u00e6\u0261\u0259n\/ \u9f99","create_at":1691844209102,"post_id":""}
-    mapData := map[string]interface{}{"id": issue.ID, "message": issue.Message, "create_at": issue.CreateAt, "userId": userID}
-    jsonStr, _ := json.Marshal(mapData)
-    http.Post(p.configuration.ThirdApi, "application/json", bytes.NewBuffer([]byte(jsonStr)))
+	//wangdexu
+	//{"id":"mhmaooxa9j835cya7tm8iu9b3y","message":"dragon \/\u02c8dr\u00e6\u0261\u0259n\/ \u9f99","create_at":1691844209102,"post_id":""}
+	mapData := map[string]interface{}{"id": issue.ID, "message": issue.Message, "description": issue.Description, "create_at": issue.CreateAt, "userId": userID}
+	jsonStr, _ := json.Marshal(mapData)
+	http.Post(p.configuration.ThirdApi, "application/json", bytes.NewBuffer([]byte(jsonStr)))
 
 	p.sendRefreshEvent(userID, []string{listToUpdate})
 
