@@ -215,7 +215,8 @@ func (p *Plugin) runAddCommand(args []string, extra *model.CommandArgs) (bool, e
 	if strings.Contains(message_str, "|") {
 		parts := strings.Split(message_str, "|")
 		message = parts[0]
-		desc = parts[1]
+        // 将parts[1:]切片连接成新的字符串
+        desc = strings.Join(parts[1:], "\n")
 	} else {
 		message = message_str
 	}
