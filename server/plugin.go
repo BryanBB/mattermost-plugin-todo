@@ -496,7 +496,9 @@ func (p *Plugin) handleComplete(w http.ResponseWriter, r *http.Request) {
 
 	//wangdexu
 	//{"id":"mhmaooxa9j835cya7tm8iu9b3y","message":"dragon \/\u02c8dr\u00e6\u0261\u0259n\/ \u9f99","create_at":1691844209102,"post_id":""}
-	mapData := map[string]interface{}{"id": issue.ID, "message": issue.Message, "description": issue.Description, "create_at": issue.CreateAt, "userId": userID}
+	hostConfig := p.API.GetConfig()
+	siteUrl := hostConfig.ServiceSettings.SiteURL
+	mapData := map[string]interface{}{"id": issue.ID, "message": issue.Message, "description": issue.Description, "createAt": issue.CreateAt, "userId": userID, "siteUrl": siteUrl}
 	jsonStr, _ := json.Marshal(mapData)
 	http.Post(p.configuration.ThirdApi, "application/json", bytes.NewBuffer([]byte(jsonStr)))
 
